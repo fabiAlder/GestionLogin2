@@ -56,6 +56,9 @@ android {
 
 
 
+        implementation (libs.androidx.navigation.compose)
+        implementation (libs.androidx.lifecycle.runtime.ktx.v251)
+        implementation (libs.material3)
     implementation (libs.androidx.activity.compose.v131)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation (libs.ui)

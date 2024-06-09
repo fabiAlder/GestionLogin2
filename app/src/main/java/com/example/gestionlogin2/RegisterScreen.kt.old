@@ -1,0 +1,84 @@
+package com.example.gestionlogin2
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PantallaRegistro(onRegistroExitoso: () -> Unit, viewModel: AppViewModel = viewModel()) {
+    var nombreUsuario by rememberSaveable { mutableStateOf("") }
+    var correoElectronico by rememberSaveable { mutableStateOf("") }
+    var contrasena by rememberSaveable { mutableStateOf("") }
+    var confirmarContrasena by rememberSaveable { mutableStateOf("") }
+    val mensajeError by viewModel.mensajeError.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        OutlinedTextField(
+            value = nombreUsuario, onValueChange = { nombreUsuario = it.trim() },
+            label = { Text(text = "Nombre de usuario") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
+        OutlinedTextField(
+            value = correoElectronico, onValueChange = { correoElectronico = it.trim() },
+            label = { Text(text = "Correo electrónico") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
+        OutlinedTextField(
+            value = contrasena, onValueChange = { contrasena = it },
+            label = { Text(text = "Contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
+        OutlinedTextField(
+            value = confirmarContrasena, onValueChange = { confirmarContrasena = it },
+            label = { Text(text = "Confirmar contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
+        Button(
+            onClick = {
+                if (nombreUsuario.esNombreValido() && correoElectronico.esCorreoElectronicoValido() && contrasena.esContrasenaValida() && contrasena == confirmarContrasena) {
+                    viewModel.registrar(correoElectronico, contrasena, nombreUsuario, onRegistroExitoso)
+                } else {
+                    viewModel.establecerMensajeError("Datos de registro inválidos o contraseñas no coinciden")
+                }
+            },
+            enabled = nombreUsuario.esNombreValido() && correoElectronico.esCorreoElectronicoValido() && contrasena.esContrasenaValida() && contrasena == confirmarContrasena
+        ) {
+            Text(text = "Registrar")
+        }
+
+        if (mensajeError.isNotEmpty()) {
+            Text(
+                text = mensajeError,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        }
+    }
+}

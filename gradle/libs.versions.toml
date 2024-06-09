@@ -10,15 +10,20 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
+lifecycleRuntimeKtxVersion = "2.5.1"
 material = "1.6.7"
+material3 = "1.2.1"
+navigationCompose = "2.7.7"
 ui = "1.6.7"
 
 [libraries]
 androidx-activity-activity-compose-v161-x5 = { module = "androidx.activity:activity-compose", version.ref = "androidxActivityActivityCompose5" }
 androidx-activity-compose-v131 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx-v251 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -32,6 +37,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 
 [plugins]
